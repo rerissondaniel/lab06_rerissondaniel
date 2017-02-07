@@ -1,0 +1,57 @@
+/**
+ * 
+ */
+package test.entidade;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import main.entidade.Jogabilidade;
+import main.entidade.Jogo;
+import main.entidade.TipoJogo;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author rerissondcsm
+ *
+ */
+public class JogoTest {
+
+	Jogo jogo1, jogo2, aux;
+
+	@Before
+	public void setup() {
+		Set<Jogabilidade> jogabilidade = new HashSet();
+		jogabilidade.add(Jogabilidade.COMPETITIVO);
+		jogabilidade.add(Jogabilidade.MULTIPLAYER);
+		jogabilidade.add(Jogabilidade.OFFLINE);
+		jogo1 = new Jogo("Final Fantasy X", 50.00, 0, jogabilidade,
+				TipoJogo.RPG);
+
+		jogabilidade = new HashSet();
+		jogabilidade.add(Jogabilidade.OFFLINE);
+		jogo1 = new Jogo("Valkyrie Profile", 20.00, 0, null, TipoJogo.RPG);
+	}
+
+	@Test
+	public void testHashCodeEquals() {
+		Assert.assertNotSame(jogo1, jogo2);
+		aux = new Jogo(jogo1.getNome(), jogo1.getPreco(), jogo1.getMaiorScore(), jogo1.getJogabilidade(), jogo1.getTipo());
+		Assert.assertEquals(jogo1, aux);
+		Assert.assertEquals(jogo1.hashCode(), aux.hashCode());
+	}
+	
+	@Test
+	public void testaRegistraJogada(){
+		jogo1.registraJogada(2, true);
+		jogo1.registraJogada(5, false);
+		jogo1.registraJogada(1, true);
+		Assert.assertEquals(5, jogo1.getMaiorScore());
+		Assert.assertEquals(2, jogo1.getQtdeZerado());
+		Assert.assertEquals(3, jogo1.getQtdeVezesJogadas());
+	}
+
+}
