@@ -1,4 +1,5 @@
-package main.entidade;
+package main.entidade.usuario;
+
 /**
  * Classe que representa o papel deste usuário no sistema.
  * 
@@ -12,4 +13,9 @@ public abstract class RoleUsuario {
 	 * @return O desconto para este usuário.
 	 */
 	public abstract double getDesconto();
+
+	/**
+	 * Altera o valor inicial do x2p do Usuário.
+	 */
+	protected abstract int getX2pInicial();
 }

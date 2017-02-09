@@ -6,9 +6,9 @@ package test.entidade;
 import java.util.HashSet;
 import java.util.Set;
 
-import main.entidade.Jogabilidade;
-import main.entidade.Jogo;
-import main.entidade.TipoJogo;
+import main.entidade.jogo.Jogabilidade;
+import main.entidade.jogo.Jogo;
+import main.entidade.jogo.TipoJogo;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,18 +28,17 @@ public class JogoTest {
 		jogabilidade.add(Jogabilidade.COMPETITIVO);
 		jogabilidade.add(Jogabilidade.MULTIPLAYER);
 		jogabilidade.add(Jogabilidade.OFFLINE);
-		jogo1 = new Jogo("Final Fantasy X", 50.00, 0, jogabilidade,
-				TipoJogo.RPG);
+		jogo1 = new Rpg("Final Fantasy X", 50.00, 0, jogabilidade);
 
 		jogabilidade = new HashSet();
 		jogabilidade.add(Jogabilidade.OFFLINE);
-		jogo1 = new Jogo("Valkyrie Profile", 20.00, 0, null, TipoJogo.RPG);
+		jogo1 = new Plataforma("Valkyrie Profile", 20.00, 0, null);
 	}
 
 	@Test
 	public void testHashCodeEquals() {
 		Assert.assertNotSame(jogo1, jogo2);
-		aux = new Jogo(jogo1.getNome(), jogo1.getPreco(), jogo1.getMaiorScore(), jogo1.getJogabilidade(), jogo1.getTipo());
+		aux = new Luta(jogo1.getNome(), jogo1.getPreco(), jogo1.getMaiorScore(), jogo1.getJogabilidade());
 		Assert.assertEquals(jogo1, aux);
 		Assert.assertEquals(jogo1.hashCode(), aux.hashCode());
 	}

@@ -1,4 +1,4 @@
-package main.entidade;
+package main.entidade.jogo;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +9,7 @@ import java.util.Set;
  * @author rerissondcsm
  *
  */
-public class Jogo {
+public abstract class Jogo {
 	/**
 	 * Nome deste jogo.
 	 */
@@ -17,7 +17,7 @@ public class Jogo {
 	/**
 	 * Preço para o aluguel deste jogo.
 	 */
-	private double preco;
+	private int preco;
 
 	/**
 	 * Maior score realizado por um jogador deste jogo.
@@ -40,11 +40,6 @@ public class Jogo {
 	private Set<Jogabilidade> jogabilidade;
 
 	/**
-	 * Representa o tipo do jogo.
-	 */
-	private TipoJogo tipo;
-
-	/**
 	 * Construtor.
 	 * 
 	 * @param nome
@@ -58,14 +53,15 @@ public class Jogo {
 	 * @param tipo
 	 *            - O {@link TipoJogo} deste jogo.
 	 */
-	public Jogo(String nome, double preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade, TipoJogo tipo) {
+	public Jogo(String nome, int preco, int maiorScore,
+			Set<Jogabilidade> jogabilidade) {
 		this.nome = nome;
 		this.preco = preco;
 		this.maiorScore = maiorScore;
 		this.jogabilidade = jogabilidade;
-		this.tipo = tipo;
 	}
+
+	public abstract int getX2pJogada();
 
 	/**
 	 * Recupera o preço deste jogo.
@@ -82,7 +78,7 @@ public class Jogo {
 	 * @param preco
 	 *            - Novo preço deste jogo.
 	 */
-	public void setPreco(double preco) {
+	public void setPreco(final int preco) {
 		this.preco = preco;
 	}
 
@@ -147,15 +143,6 @@ public class Jogo {
 	}
 
 	/**
-	 * Recupera o tipo deste jogo.
-	 * 
-	 * @return {@link TipoJogo} o tipo deste jogo.
-	 */
-	public TipoJogo getTipo() {
-		return tipo;
-	}
-
-	/**
 	 * Registra uma jogada. Caso o {@code score} seja maior que
 	 * {@code maiorScore}, {@code maiorScore} passa a ter o valor de score. Caso
 	 * {@code zerou} seja true, {@code qtdeZerado} será incrementada em 1.
@@ -171,8 +158,7 @@ public class Jogo {
 		if (zerou) {
 			this.qtdeZerado++;
 		}
-		// TODO ver o que é o x2p.
-		return 0;
+		return getX2pJogada();
 	}
 
 	/**
@@ -191,7 +177,6 @@ public class Jogo {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + qtdeVezesJogadas;
 		result = prime * result + qtdeZerado;
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		return result;
 	}
 
@@ -226,8 +211,6 @@ public class Jogo {
 			return false;
 		if (qtdeZerado != other.qtdeZerado)
 			return false;
-		if (tipo != other.tipo)
-			return false;
 		return true;
 	}
 
@@ -239,6 +222,6 @@ public class Jogo {
 		return "Jogo [nome=" + nome + ", preco=" + preco + ", maiorScore="
 				+ maiorScore + ", qtdeVezesJogadas=" + qtdeVezesJogadas
 				+ ", qtdeZerado=" + qtdeZerado + ", jogabilidade="
-				+ jogabilidade + ", tipo=" + tipo + "]";
+				+ jogabilidade + "]";
 	}
 }

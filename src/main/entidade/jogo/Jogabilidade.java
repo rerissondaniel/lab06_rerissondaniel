@@ -1,4 +1,4 @@
-package main.entidade;
+package main.entidade.jogo;
 /**
  * Enum que representa as possíveis jogabilidades para um jogo.
  * 
