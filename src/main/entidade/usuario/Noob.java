@@ -8,7 +8,7 @@ import main.entidade.jogo.Jogo;
  * @author rerissondcsm
  *
  */
-public class Noob extends RoleUsuario {
+public class Noob extends Role {
 
 	/**
 	 * {@inheritDoc}
@@ -25,8 +25,18 @@ public class Noob extends RoleUsuario {
 	protected final int getX2pInicial() {
 		return 0;
 	}
-	
+
 	public int getX2pCompra(Jogo jogo) {
 		return (int) Math.floor(10.0 * jogo.getPreco() / 100.0);
+	}
+
+	@Override
+	public String toString() {
+		return "Noob";
+	}
+
+	@Override
+	public int getx2pCompra(double precoJogo) {
+		return (int) precoJogo * 15;
 	}
 }

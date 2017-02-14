@@ -3,6 +3,8 @@ package main.entidade.jogo;
 import java.util.HashSet;
 import java.util.Set;
 
+import main.util.Util;
+
 /**
  * Classe que representa um jogo.
  * 
@@ -15,9 +17,9 @@ public abstract class Jogo {
 	 */
 	private String nome;
 	/**
-	 * Preço para o aluguel deste jogo.
+	 * Preço para compra deste jogo.
 	 */
-	private int preco;
+	private double preco;
 
 	/**
 	 * Maior score realizado por um jogador deste jogo.
@@ -53,16 +55,25 @@ public abstract class Jogo {
 	 * @param tipo
 	 *            - O {@link TipoJogo} deste jogo.
 	 */
-	public Jogo(String nome, int preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade) {
+	public Jogo(String nome, double preco, int maiorScore,
+			Set<Jogabilidade> jogabilidade) throws JogoInvalidoException{
+		if(Util.ehNulaOuVazia(nome)){
+			throw new JogoInvalidoException("O nome do jogo não pode ser vazio.");
+		}
+		if(jogabilidade == null){
+			throw new JogoInvalidoException("A jogabilidade do jogo não pode ser nula.");
+		}
 		this.nome = nome;
 		this.preco = preco;
 		this.maiorScore = maiorScore;
 		this.jogabilidade = jogabilidade;
 	}
-
+	
+	/**
+	 * @return o x2p para determinada jogada
+	 */
 	public abstract int getX2pJogada();
-
+	
 	/**
 	 * Recupera o preço deste jogo.
 	 * 
@@ -78,7 +89,7 @@ public abstract class Jogo {
 	 * @param preco
 	 *            - Novo preço deste jogo.
 	 */
-	public void setPreco(final int preco) {
+	public void setPreco(final double preco) {
 		this.preco = preco;
 	}
 

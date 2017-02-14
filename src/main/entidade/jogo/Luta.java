@@ -3,11 +3,13 @@ package main.entidade.jogo;
 import java.util.Set;
 
 public class Luta extends Jogo {
+	
+	public static final String REPRESENTACAO_STRING = "Luta";
 
 	private int maiorScoreAnterior;
 
-	public Luta(String nome, int preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade) {
+	public Luta(String nome, double preco, int maiorScore,
+			Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
 		super(nome, preco, maiorScore, jogabilidade);
 	}
 
@@ -19,5 +21,4 @@ public class Luta extends Jogo {
 		}
 		return 0;
 	}
-
 }

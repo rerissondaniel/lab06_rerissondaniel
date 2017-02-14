@@ -1,4 +1,5 @@
 package main.entidade.jogo;
+
 /**
  * Enum que representa as possíveis jogabilidades para um jogo.
  * 
@@ -31,5 +32,14 @@ public enum Jogabilidade {
 	 */
 	public String getEstilo() {
 		return estilo;
+	}
+
+	public static final Jogabilidade getPorEstilo(String estilo) {
+		for (Jogabilidade jogabilidade : values()) {
+			if (jogabilidade.getEstilo().equals(estilo)) {
+				return jogabilidade;
+			}
+		}
+		return null;
 	}
 }

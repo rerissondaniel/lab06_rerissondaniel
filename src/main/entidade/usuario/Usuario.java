@@ -3,7 +3,7 @@ package main.entidade.usuario;
 import java.util.Map;
 
 import main.entidade.jogo.Jogo;
-import main.entidade.jogo.Luta;
+import main.util.Util;
 
 /**
  * Classe que representa um usuário.
@@ -18,12 +18,17 @@ public class Usuario {
 	private String nome;
 
 	/**
+	 * Quantia disponível para a conta deste usuário.
+	 */
+	private int dinheiro;
+
+	/**
 	 * Login utilizado para acesso ao sistema. É único para cada usuário.
 	 */
 	private String login;
 
 	/**
-	 * Lista dos jogos comprados por este usuário.
+	 * Conjunto dos jogos comprados por este usuário.
 	 */
 	private Map<String, Jogo> jogosComprados;
 
@@ -33,18 +38,27 @@ public class Usuario {
 	private int x2p;
 
 	/**
-	 * Score máximo em jogos de luta.
-	 */
-	private int scoreMaximoLuta;
-
-	/**
 	 * Papel deste usuário.
 	 */
-	private RoleUsuario role;
+	private Role role;
 
+	/**
+	 * Construtor.
+	 * 
+	 * @param nome
+	 * @param login
+	 * @param jogosComprados
+	 * @param role
+	 * @throws UsuarioInvalidoException
+	 */
 	public Usuario(String nome, String login, Map<String, Jogo> jogosComprados,
-			RoleUsuario role) {
-		super();
+			Role role) throws UsuarioInvalidoException {
+		if (Util.ehNulaOuVazia(login)) {
+			throw new UsuarioInvalidoException("O login do usuário é inválido!");
+		}
+		if (Util.ehNulaOuVazia(nome)) {
+			throw new UsuarioInvalidoException("O nome do usuário é inválido!");
+		}
 		this.nome = nome;
 		this.login = login;
 		this.jogosComprados = jogosComprados;
@@ -52,12 +66,24 @@ public class Usuario {
 		this.x2p = role.getX2pInicial();
 	}
 
+	/**
+	 * Registra uma jogada deste jogo.
+	 * 
+	 * @param nomeJogo
+	 *            - Nome do jogo que foi jogado.
+	 * @param score
+	 *            - Score do jogo que foi jogado.
+	 * @param zerou
+	 *            - Indica se o jogo foi zerado.
+	 */
 	public void registraJogada(String nomeJogo, int score, boolean zerou) {
 		Jogo jogo = jogosComprados.get(nomeJogo);
 		this.x2p += jogo.registraJogada(score, zerou);
-		if (jogo instanceof Luta) {
-			this.scoreMaximoLuta = Math.max(scoreMaximoLuta, score);
-		}
+	}
+
+	public void adicionaJogo(Jogo jogo) {
+		jogosComprados.put(jogo.getNome(), jogo);
+		this.x2p += role.getx2pCompra(jogo.getPreco());
 	}
 
 	public int getQuantidadeDeJogosComprados() {
@@ -72,11 +98,11 @@ public class Usuario {
 		return role.getX2pInicial();
 	}
 
-	public RoleUsuario getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(RoleUsuario role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
@@ -90,5 +116,13 @@ public class Usuario {
 
 	public int getX2p() {
 		return x2p;
+	}
+
+	public int getDinheiro() {
+		return dinheiro;
+	}
+
+	public void setDinheiro(int dinheiro) {
+		this.dinheiro = dinheiro;
 	}
 }

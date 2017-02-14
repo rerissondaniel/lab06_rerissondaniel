@@ -4,8 +4,10 @@ import java.util.Set;
 
 public class Rpg extends Jogo {
 
-	public Rpg(String nome, int preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade) {
+	public static final String REPRESENTACAO_STRING = "Rpg";
+	
+	public Rpg(String nome, double preco, int maiorScore,
+			Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
 		super(nome, preco, maiorScore, jogabilidade);
 	}
 
@@ -13,5 +15,4 @@ public class Rpg extends Jogo {
 	public final int getX2pJogada() {
 		return 10;
 	}
-
 }
