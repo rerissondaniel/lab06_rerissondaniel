@@ -1,29 +1,26 @@
-package main.entidade.usuario;
+package main.entidade.usuario.role;
 
 import main.entidade.jogo.Jogo;
 
 /**
- * Classe que representa o role do usuário noob.
+ * Classe que representa o Role do usuário veterano.
  * 
  * @author rerissondcsm
  *
  */
-public class Noob extends Role {
+public class Veterano extends Role {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public double getDesconto() {
-		return 0.10;
+		return 0.20;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	protected final int getX2pInicial() {
-		return 0;
+	public final int getX2pInicial() {
+		return 1000;
 	}
 
 	public int getX2pCompra(Jogo jogo) {
@@ -32,11 +29,11 @@ public class Noob extends Role {
 
 	@Override
 	public String toString() {
-		return "Noob";
+		return "Veterano";
 	}
 
 	@Override
 	public int getx2pCompra(double precoJogo) {
-		return (int) precoJogo * 15;
+		return (int)precoJogo * 15;
 	}
 }

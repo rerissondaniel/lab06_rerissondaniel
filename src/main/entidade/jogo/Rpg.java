@@ -4,15 +4,27 @@ import java.util.Set;
 
 public class Rpg extends Jogo {
 
-	public static final String REPRESENTACAO_STRING = "Rpg";
-	
-	public Rpg(String nome, double preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
-		super(nome, preco, maiorScore, jogabilidade);
-	}
+    public static final String REPRESENTACAO_STRING = "Rpg";
+    private static final int FATOR_PONTUACAO_RPG = 10;
 
-	@Override
-	public final int getX2pJogada() {
-		return 10;
-	}
+    public Rpg(final String nome, final double preco,
+               final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
+        super(nome, preco, jogabilidade);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int getX2pJogada() {
+        return FATOR_PONTUACAO_RPG;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Rpg{" + super.toString() + "}";
+    }
 }

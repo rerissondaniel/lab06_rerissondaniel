@@ -48,15 +48,11 @@ public abstract class Jogo {
 	 *            - O nome deste jogo.
 	 * @param preco
 	 *            - O preço deste jogo.
-	 * @param maiorScore
-	 *            - O maiorScore deste jogo.
 	 * @param jogabilidade
 	 *            - O conjunto de {@link Jogabilidade} deste jogo.
-	 * @param tipo
-	 *            - O {@link TipoJogo} deste jogo.
 	 */
-	public Jogo(String nome, double preco, int maiorScore,
-			Set<Jogabilidade> jogabilidade) throws JogoInvalidoException{
+	public Jogo(final String nome, final double preco,
+			final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException{
 		if(Util.ehNulaOuVazia(nome)){
 			throw new JogoInvalidoException("O nome do jogo não pode ser vazio.");
 		}
@@ -65,7 +61,7 @@ public abstract class Jogo {
 		}
 		this.nome = nome;
 		this.preco = preco;
-		this.maiorScore = maiorScore;
+		this.maiorScore = 0;
 		this.jogabilidade = jogabilidade;
 	}
 	
@@ -163,7 +159,7 @@ public abstract class Jogo {
 	 * @param zerou
 	 *            - Indica se o jogador zerou o jogo.
 	 */
-	public int registraJogada(int score, boolean zerou) {
+	public int registraJogada(final int score, final boolean zerou) {
 		this.maiorScore = Math.max(score, this.maiorScore);
 		this.qtdeVezesJogadas++;
 		if (zerou) {
@@ -195,7 +191,7 @@ public abstract class Jogo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
