@@ -8,6 +8,10 @@ import java.util.Set;
 
 import main.entidade.jogo.*;
 
+import main.entidade.jogo.exception.JogoInvalidoException;
+import main.entidade.jogo.tipo.Luta;
+import main.entidade.jogo.tipo.Plataforma;
+import main.entidade.jogo.tipo.Rpg;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

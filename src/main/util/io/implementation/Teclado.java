@@ -1,35 +1,37 @@
-package main.util;
+package main.util.io.implementation;
+
+import main.util.io.Entrada;
 
 import java.util.Scanner;
 
-public class Entrada {
-	public static Scanner teclado = new Scanner(System.in);
+public class Teclado implements Entrada {
+	public Scanner teclado = new Scanner(System.in);
 
-	public static Integer leInteiro() {
+	public Integer leInteiro() {
 		String numeroLido = teclado.nextLine();
 		return Integer.parseInt(numeroLido);
 	}
 	
-	public static Integer leInteiro(String prompt) {
+	public Integer leInteiro(String prompt) {
 		System.out.print(prompt);
 		return leInteiro();
 	}
 	
-	public static String leString() {
+	public String leString() {
 		return teclado.nextLine();
 	}
 	
-	public static String leString(String prompt) {
+	public String leString(String prompt) {
 		System.out.print(prompt);
 		return leString();
 	}
 
-	public static Double leDouble() {
+	public Double leDouble() {
 		String numeroLido = teclado.nextLine();
 		return Double.parseDouble(numeroLido.replace(",", "."));
 	}
 	
-	public static Double leDouble(String prompt) {
+	public Double leDouble(String prompt) {
 		System.out.print(prompt);
 		return leDouble();
 	}

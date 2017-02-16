@@ -1,4 +1,9 @@
-package main.entidade.jogo;
+package main.entidade.jogo.tipo;
+
+import main.entidade.jogo.Jogabilidade;
+import main.entidade.jogo.Jogo;
+import main.entidade.jogo.exception.JogoInvalidoException;
+import main.entidade.jogo.exception.ScoreInvalidoException;
 
 import java.util.Set;
 

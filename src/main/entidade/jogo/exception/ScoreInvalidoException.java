@@ -1,4 +1,4 @@
-package main.entidade.jogo;
+package main.entidade.jogo.exception;
 
 public class ScoreInvalidoException extends Exception {
 	/**

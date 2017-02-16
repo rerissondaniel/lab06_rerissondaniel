@@ -98,16 +98,8 @@ public class Usuario {
         return jogosComprados.values();
     }
 
-    public int getQuantidadeDeJogosComprados() {
-        return jogosComprados.size();
-    }
-
     public double getDesconto() {
         return role.getDesconto();
-    }
-
-    public int getX2pInicial() {
-        return role.getX2pInicial();
     }
 
     public Role getRole() {

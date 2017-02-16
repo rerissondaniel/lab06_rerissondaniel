@@ -3,6 +3,7 @@ package main.entidade.jogo;
 import java.util.HashSet;
 import java.util.Set;
 
+import main.entidade.jogo.exception.JogoInvalidoException;
 import main.util.Util;
 
 /**
@@ -52,7 +53,7 @@ public abstract class Jogo {
 	 *            - O conjunto de {@link Jogabilidade} deste jogo.
 	 */
 	public Jogo(final String nome, final double preco,
-			final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException{
+			final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
 		if(Util.ehNulaOuVazia(nome)){
 			throw new JogoInvalidoException("O nome do jogo não pode ser vazio.");
 		}

@@ -1,4 +1,4 @@
-package main.service;
+package main.service.exception;
 
 /**
  * Created by rerisson on 14/02/17.
