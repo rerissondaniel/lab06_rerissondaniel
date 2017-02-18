@@ -175,11 +175,21 @@ public class Loja {
         }
     }
 
+    /**
+     * Lê o login de um usuário.
+     *
+     * @return o login lido.
+     */
     private String leLogin() {
         saida.escreve(INSIRA_LOGIN_MSG);
         return entrada.leString();
     }
 
+    /**
+     * Lê o nome de um usuário.
+     *
+     * @return o nome lido.
+     */
     private String leNome() {
         saida.escreve(INSIRA_NOME_MSG);
         return entrada.leString();

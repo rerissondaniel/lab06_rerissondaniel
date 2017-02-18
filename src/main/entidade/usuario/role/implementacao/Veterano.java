@@ -1,23 +1,24 @@
-package main.entidade.usuario.role;
+package main.entidade.usuario.role.implementacao;
 
 import main.entidade.jogo.Jogo;
+import main.entidade.usuario.role.Role;
 
 /**
- * Classe que representa o role do usuário noob.
+ * Classe que representa o Role do usuário veterano.
  *
  * @author rerissondcsm
  */
-public class Noob implements Role {
+public class Veterano implements Role {
 
-    private static final int X2P_INICIAL_NOOB = 0;
-    private static final double DESCONTO_NOOB = 0.10;
+    private static final double DESCONTO_VETERANO = 0.20;
+    private static final int X2P_INICIAL_VETERANO = 1000;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public double getDesconto() {
-        return DESCONTO_NOOB;
+        return DESCONTO_VETERANO;
     }
 
     /**
@@ -25,7 +26,7 @@ public class Noob implements Role {
      */
     @Override
     public final int getX2pInicial() {
-        return X2P_INICIAL_NOOB;
+        return X2P_INICIAL_VETERANO;
     }
 
     /**
@@ -33,7 +34,7 @@ public class Noob implements Role {
      */
     @Override
     public String toString() {
-        return "Noob";
+        return "Veterano";
     }
 
     /**
@@ -41,6 +42,6 @@ public class Noob implements Role {
      */
     @Override
     public int getx2pCompra(double precoJogo) {
-        return (int) precoJogo * 10;
+        return (int) precoJogo * 15;
     }
 }

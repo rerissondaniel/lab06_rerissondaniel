@@ -9,9 +9,9 @@ import main.entidade.jogo.tipo.Plataforma;
 import main.entidade.jogo.tipo.Rpg;
 import main.entidade.usuario.Usuario;
 import main.entidade.usuario.exception.UsuarioInvalidoException;
-import main.entidade.usuario.role.Noob;
+import main.entidade.usuario.role.implementacao.Noob;
 import main.entidade.usuario.role.Role;
-import main.entidade.usuario.role.Veterano;
+import main.entidade.usuario.role.implementacao.Veterano;
 import main.service.Formatadora;
 import main.service.exception.SaldoInsuficienteException;
 import main.service.exception.UsuarioInaptoException;
@@ -65,8 +65,7 @@ public class LojaControladorImpl implements LojaControlador {
         if (usuario == null) {
             return false;
         }
-        double quantiaAtual = usuario.getDinheiro();
-        usuario.setDinheiro(quantiaAtual + quantia);
+        usuario.adicionaSaldo(quantia);
         return true;
     }
 
@@ -100,21 +99,7 @@ public class LojaControladorImpl implements LojaControlador {
     public void registraJogada(String nomeJogo, String login, int score, boolean zerou) throws JogoInvalidoException, UsuarioInvalidoException {
         Usuario usuario = usuarios.get(login);
         verificaValidadeUsuario(usuario);
-        Jogo jogo = usuario.getJogo(nomeJogo);
-        verificaValidadeJogo(jogo);
-        jogo.registraJogada(score, zerou);
-    }
-
-    /**
-     * Verifica a validade de um jogo.
-     *
-     * @param jogo
-     * @throws JogoInvalidoException Caso o jogo seja inválido.
-     */
-    private void verificaValidadeJogo(Jogo jogo) throws JogoInvalidoException {
-        if (jogo == null) {
-            throw new JogoInvalidoException(O_JOGO_NAO_FOI_ENCONTRADO);
-        }
+        usuario.registraJogada(nomeJogo, score, zerou);
     }
 
     /**
@@ -162,7 +147,7 @@ public class LojaControladorImpl implements LojaControlador {
      * @throws SaldoInsuficienteException Caso o usuário não tenha saldo suficiente para a compra do jogo.
      */
     private void verificaSaldoSuficiente(final Usuario usuario, final Jogo jogo) throws SaldoInsuficienteException {
-        if (usuario.getDinheiro() < jogo.getPreco() * (1 - usuario.getDesconto())) {
+        if (usuario.getSaldo() < jogo.getPreco() * (1 - usuario.getDesconto())) {
             throw new SaldoInsuficienteException(SALDO_DE_USUARIO_INSUFICIENTE);
         }
     }

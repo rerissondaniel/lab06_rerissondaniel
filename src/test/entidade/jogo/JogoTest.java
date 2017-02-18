@@ -15,6 +15,7 @@ import main.entidade.jogo.tipo.Rpg;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import test.util.TestUtils;
 
 /**
  * Testes para {@link Jogo}.
@@ -27,15 +28,8 @@ public class JogoTest {
 
     @Before
     public void setup() throws JogoInvalidoException {
-        jogabilidades1 = new HashSet();
-        jogabilidades1.add(Jogabilidade.COMPETITIVO);
-        jogabilidades1.add(Jogabilidade.MULTIPLAYER);
-        jogabilidades1.add(Jogabilidade.OFFLINE);
-
-        jogabilidades2 = new HashSet();
-        jogabilidades2.add(Jogabilidade.OFFLINE);
-        jogabilidades2.add(Jogabilidade.COOPERATIVO);
-        jogabilidades2.add(Jogabilidade.ONLINE);
+        jogabilidades1 = TestUtils.getJogabilidades1();
+        jogabilidades2 = TestUtils.getJogabilidades1();
     }
 
     @Test(expected = JogoInvalidoException.class)
@@ -63,17 +57,7 @@ public class JogoTest {
         Assert.assertEquals(jogo1.hashCode(), aux.hashCode());
     }
 
-    @Test
-    public void testaRegistraJogada2() throws JogoInvalidoException {
-        Jogo jogo1 = new Rpg("Final Fantasy XIV", 50.00, jogabilidades1);
-        Assert.assertEquals(10, jogo1.registraJogada(11000, true));
 
-        Jogo jogo2 = new Plataforma("Valkyrie Profile", 200.00, jogabilidades1);
-        Assert.assertEquals(20, jogo2.registraJogada(1000, true));
-
-        Jogo jogo3 = new Luta("Tekken", 200.00, jogabilidades1);
-        Assert.assertEquals(1, jogo3.registraJogada(1000, true));
-    }
 
     @Test
     public void testaRegistraJogada() {

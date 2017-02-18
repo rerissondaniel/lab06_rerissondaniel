@@ -4,6 +4,7 @@ import main.entidade.jogo.Jogabilidade;
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -56,5 +57,25 @@ public class Plataforma extends Jogo {
         return "Plataforma{{" +
                 "qtdeZerouAnterior=" + qtdeZerouAnterior +
                 '}' + super.toString() + "}";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Plataforma that = (Plataforma) o;
+        return qtdeZerouAnterior == that.qtdeZerouAnterior;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), qtdeZerouAnterior);
     }
 }

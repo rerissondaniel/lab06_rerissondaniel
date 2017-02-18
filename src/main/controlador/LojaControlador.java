@@ -21,7 +21,6 @@ public interface LojaControlador {
     String TIPO_JOGO_NAO_ENCONTRADO = "Não há o tipo de jogo indicado";
     String SALDO_DE_USUARIO_INSUFICIENTE = "Saldo do usuário insuficiente";
     String USUARIO_NAO_ENCONTRADO = "O usuário não pode ser encontrado.";
-    String O_JOGO_NAO_FOI_ENCONTRADO = "O jogo não pôde ser encontrado.";
     String USUARIO_JA_E_VETERANO = "Usuário já é veterano.";
     int X2P_MINIMO_VETERANO = 1000;
 

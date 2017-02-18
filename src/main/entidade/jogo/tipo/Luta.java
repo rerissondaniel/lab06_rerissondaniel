@@ -4,6 +4,7 @@ import main.entidade.jogo.Jogabilidade;
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -46,5 +47,25 @@ public class Luta extends Jogo {
         return "Luta{{" +
                 "maiorScoreAnterior=" + maiorScoreAnterior +
                 '}' + super.toString() + "}";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Luta luta = (Luta) o;
+        return maiorScoreAnterior == luta.maiorScoreAnterior;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), maiorScoreAnterior);
     }
 }

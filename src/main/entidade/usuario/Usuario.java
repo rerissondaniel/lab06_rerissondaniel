@@ -3,6 +3,7 @@ package main.entidade.usuario;
 import java.util.*;
 
 import main.entidade.jogo.Jogo;
+import main.entidade.jogo.exception.JogoInvalidoException;
 import main.entidade.usuario.exception.UsuarioInvalidoException;
 import main.entidade.usuario.role.Role;
 import util.Util;
@@ -13,6 +14,12 @@ import util.Util;
  * @author rerissondcsm
  */
 public class Usuario {
+    //Constantes para mensagens de exceptions.
+    private static final String O_JOGO_NAO_FOI_ENCONTRADO = "O jogo não pôde ser encontrado.";
+    private static final String LOGIN_INVALIDO = "O login do usuário é inválido!";
+    private static final String NOME_INVALIDO = "O nome do usuário é inválido";
+    private static final String ROLE_INVALIDO = "É necessário que o usuário tenha um role inicial.";
+
     /**
      * Nome deste usuário.
      */
@@ -21,7 +28,7 @@ public class Usuario {
     /**
      * Quantia disponível para a conta deste usuário.
      */
-    private double dinheiro;
+    private double saldo;
 
     /**
      * Login utilizado para acesso ao sistema. É único para cada usuário.
@@ -55,10 +62,13 @@ public class Usuario {
     public Usuario(String nome, String login, Map<String, Jogo> jogosComprados,
                    Role role) throws UsuarioInvalidoException {
         if (Util.ehNulaOuVazia(login)) {
-            throw new UsuarioInvalidoException("O login do usuário é inválido!");
+            throw new UsuarioInvalidoException(LOGIN_INVALIDO);
         }
         if (Util.ehNulaOuVazia(nome)) {
-            throw new UsuarioInvalidoException("O nome do usuário é inválido!");
+            throw new UsuarioInvalidoException(NOME_INVALIDO);
+        }
+        if (role == null) {
+            throw new UsuarioInvalidoException(ROLE_INVALIDO);
         }
         this.nome = nome;
         this.login = login;
@@ -74,9 +84,22 @@ public class Usuario {
      * @param score    - Score do jogo que foi jogado.
      * @param zerou    - Indica se o jogo foi zerado.
      */
-    public void registraJogada(final String nomeJogo, final int score, final boolean zerou) {
+    public void registraJogada(final String nomeJogo, final int score, final boolean zerou) throws JogoInvalidoException {
         Jogo jogo = jogosComprados.get(nomeJogo);
+        verificaValidadeJogo(jogo);
         this.x2p += jogo.registraJogada(score, zerou);
+    }
+
+    /**
+     * Verifica a validade de um jogo.
+     *
+     * @param jogo
+     * @throws JogoInvalidoException Caso o jogo seja inválido.
+     */
+    private void verificaValidadeJogo(Jogo jogo) throws JogoInvalidoException {
+        if (jogo == null) {
+            throw new JogoInvalidoException(O_JOGO_NAO_FOI_ENCONTRADO);
+        }
     }
 
     /**
@@ -87,20 +110,9 @@ public class Usuario {
      * @param jogo - {@link Jogo} a ser adicionado.
      */
     public void adicionaJogo(final Jogo jogo) {
-        this.dinheiro -= jogo.getPreco();
+        this.saldo -= jogo.getPreco() - (jogo.getPreco() * role.getDesconto());
         jogosComprados.put(jogo.getNome(), jogo);
         this.x2p += role.getx2pCompra(jogo.getPreco());
-        this.x2p += role.getx2pCompra(jogo.getPreco());
-    }
-
-    /**
-     * Retorna um jogo a partir de {@code nomeJogo}.
-     *
-     * @param nomeJogo - nome do jogo a ser recuperado.
-     * @return - {@link Jogo} que tem {@code nomeJogo} como nome.
-     */
-    public Jogo getJogo(String nomeJogo) {
-        return jogosComprados.get(nomeJogo);
     }
 
     /**
@@ -134,11 +146,50 @@ public class Usuario {
         return x2p;
     }
 
-    public double getDinheiro() {
-        return dinheiro;
+    public double getSaldo() {
+        return saldo;
     }
 
-    public void setDinheiro(final double dinheiro) {
-        this.dinheiro = dinheiro;
+    public void adicionaSaldo(final double saldo) {
+        this.saldo += saldo;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Double.compare(usuario.saldo, saldo) == 0 &&
+                x2p == usuario.x2p &&
+                Objects.equals(nome, usuario.nome) &&
+                Objects.equals(login, usuario.login) &&
+                Objects.equals(jogosComprados, usuario.jogosComprados) &&
+                Objects.equals(role, usuario.role);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, saldo, login, jogosComprados, x2p, role);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nome='" + nome + '\'' +
+                ", saldo=" + saldo +
+                ", login='" + login + '\'' +
+                ", jogosComprados=" + jogosComprados +
+                ", x2p=" + x2p +
+                ", role=" + role +
+                '}';
     }
 }
