@@ -13,6 +13,8 @@ public class Noob implements Role {
     private static final int X2P_INICIAL_NOOB = 0;
     private static final double DESCONTO_NOOB = 0.10;
 
+    public static final String REPRESENTACAO_STRING = "Noob";
+
     /**
      * {@inheritDoc}
      */

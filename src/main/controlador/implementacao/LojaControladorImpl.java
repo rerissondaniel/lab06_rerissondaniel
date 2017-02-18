@@ -9,14 +9,18 @@ import main.entidade.jogo.tipo.Plataforma;
 import main.entidade.jogo.tipo.Rpg;
 import main.entidade.usuario.Usuario;
 import main.entidade.usuario.exception.UsuarioInvalidoException;
-import main.entidade.usuario.role.implementacao.Noob;
 import main.entidade.usuario.role.Role;
+import main.entidade.usuario.role.implementacao.Noob;
 import main.entidade.usuario.role.implementacao.Veterano;
 import main.service.Formatadora;
 import main.service.exception.SaldoInsuficienteException;
 import main.service.exception.UsuarioInaptoException;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Implementação de {@link LojaControlador}.
@@ -50,9 +54,9 @@ public class LojaControladorImpl implements LojaControlador {
      * {@inheritDoc}
      */
     @Override
-    public void adicionaUsuario(final String nome, final String login)
+    public void adicionaUsuario(final String nome, final String login, final String tipo)
             throws UsuarioInvalidoException {
-        Usuario usuario = new Usuario(nome, login, new HashMap<>(), new Noob());
+        Usuario usuario = criaUsuario(nome, login, tipo);
         usuarios.put(login, usuario);
     }
 
@@ -161,6 +165,30 @@ public class LojaControladorImpl implements LojaControlador {
     private boolean verificaUsuarioAptoUpgrade(Usuario usuario) {
         Role papel = usuario.getRole();
         return papel.getClass().equals(Noob.class) && usuario.getX2p() >= X2P_MINIMO_VETERANO;
+    }
+
+    /**
+     * Cria um usuario a partir dos parâmetros.
+     *
+     * @param nome
+     * @param login
+     * @param tipo
+     * @return
+     * @throws UsuarioInvalidoException Caso algum dos dados seja inválido.
+     */
+    private Usuario criaUsuario(String nome, String login, String tipo) throws UsuarioInvalidoException {
+        Usuario usuario = usuarios.get(login);
+        if (usuario != null) {
+            throw new UsuarioInvalidoException(USUARIO_EXISTENTE);
+        }
+        if (Noob.REPRESENTACAO_STRING.equalsIgnoreCase(tipo)) {
+            usuario = new Usuario(nome, login, new HashMap<>(), new Noob());
+        } else if (Veterano.REPRESENTACAO_STRING.equalsIgnoreCase(tipo)) {
+            usuario = new Usuario(nome, login, new HashMap<>(), new Veterano());
+        } else {
+            usuario = new Usuario(nome, login, new HashMap<>(), null);
+        }
+        return usuario;
     }
 
     /**

@@ -19,19 +19,23 @@ public class Loja {
     private static final String ADICIONAR_DINHEIRO_USUARIO_MSG = "Adicionar dinheiro à conta de usuário";
     private static final String VENDER_JOGOS_USUARIO_MSG = "Vender jogos usuário";
     private static final String IMPRIMIR_RELATORIO_USUARIOS_MSG = "Imprimir relatório usuários";
-    private static final String INSIRA_UMA_OPCAO_MSG = "Insira uma opção: ";
-    private static final String SAIR_MSG = "Sair";
     private static final String OPCAO_INVALIDA_MSG = "Opção inválida";
     private static final String USUARIO_NAO_ENCONTRADO_MSG = "Usuário não encontrado";
     private static final String UPGRADE_USUARIO_MSG = "Fazer upgrade de usuário: ";
+    private static final String SAIR_MSG = "Sair";
+
+    private static final String INSIRA_UMA_OPCAO_MSG = "Insira uma opção: ";
     private static final String INSIRA_NOME_MSG = "Insira o nome: ";
     private static final String INSIRA_LOGIN_MSG = "Insira o login: ";
     private static final String INSIRA_QUANTIA_MSG = "Insira quanto deseja adicionar à conta de usuário: ";
     private static final String INSIRA_NOME_JOGO_MSG = "Insira o nome do jogo: ";
     private static final String INSIRA_JOGABILIDADE_MSG = "Insira a jogabilidade do jogo (insira \"acabou\", quando terminar): ";
     private static final String INSIRA_PRECO_JOGO_MSG = "Insira o preço do jogo: ";
+    private static final String INSIRA_TIPO_USUARIO_MSG = "Insira o tipo do usuário(\"Veterano\" ou \"Noob\" ): ";
+
     private static final String NAO_MSG = "Nao";
     private static final String SIM_MSG = "Sim";
+
     private static final String USUARIO_ZEROU_JOGO_MSG = "O usuário zerou o jogo? (" + SIM_MSG + "/" + NAO_MSG;
 
     private static final String INSIRA_TIPO_JOGO_MSG = "Insira o tipo do jogo (Rpg, Luta ou Plataforma): ";
@@ -168,11 +172,17 @@ public class Loja {
     private void adicionaUsuario() {
         String nome = leNome();
         String login = leLogin();
+        String tipo = leTipo();
         try {
-            loja.adicionaUsuario(nome, login);
+            loja.adicionaUsuario(nome, login, tipo);
         } catch (UsuarioInvalidoException usuarioInvalido) {
             saida.escreve(usuarioInvalido.getMessage());
         }
+    }
+
+    private String leTipo() {
+        saida.escreve(INSIRA_TIPO_USUARIO_MSG);
+        return entrada.leString();
     }
 
     /**

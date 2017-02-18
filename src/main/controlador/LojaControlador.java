@@ -18,6 +18,7 @@ public interface LojaControlador {
      * Constantes recomendadas para a implementação desta interface.
      */
 
+    String USUARIO_EXISTENTE = "Login já cadastrado";
     String TIPO_JOGO_NAO_ENCONTRADO = "Não há o tipo de jogo indicado";
     String SALDO_DE_USUARIO_INSUFICIENTE = "Saldo do usuário insuficiente";
     String USUARIO_NAO_ENCONTRADO = "O usuário não pode ser encontrado.";
@@ -36,7 +37,7 @@ public interface LojaControlador {
      * @param login - Login do usuário.
      * @throws UsuarioInvalidoException Caso o usuário seja inválido.
      */
-    void adicionaUsuario(final String nome, final String login)
+    void adicionaUsuario(final String nome, final String login, final String tipo)
             throws UsuarioInvalidoException;
 
     /**

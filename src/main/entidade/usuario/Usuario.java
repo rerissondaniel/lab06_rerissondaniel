@@ -61,6 +61,23 @@ public class Usuario {
      */
     public Usuario(String nome, String login, Map<String, Jogo> jogosComprados,
                    Role role) throws UsuarioInvalidoException {
+        verificaDadosUsuario(nome, login, role);
+        this.nome = nome;
+        this.login = login;
+        this.jogosComprados = jogosComprados;
+        this.role = role;
+        this.x2p = role.getX2pInicial();
+    }
+
+    /**
+     * Verifica os dados passados como parâmetro.
+     *
+     * @param nome
+     * @param login
+     * @param role
+     * @throws UsuarioInvalidoException Caso algum dos dados seja inválido.
+     */
+    private void verificaDadosUsuario(String nome, String login, Role role) throws UsuarioInvalidoException {
         if (Util.ehNulaOuVazia(login)) {
             throw new UsuarioInvalidoException(LOGIN_INVALIDO);
         }
@@ -70,11 +87,6 @@ public class Usuario {
         if (role == null) {
             throw new UsuarioInvalidoException(ROLE_INVALIDO);
         }
-        this.nome = nome;
-        this.login = login;
-        this.jogosComprados = jogosComprados;
-        this.role = role;
-        this.x2p = role.getX2pInicial();
     }
 
     /**

@@ -21,18 +21,19 @@ public class FormatadoraCentralP2Cg implements Formatadora {
     public final List<String> formataDadosUsuario(final Collection<Usuario> usuarios) {
         List<String> relatorio = new ArrayList<>();
         double total = 0;
-        relatorio.add("=== Central P2-CG ===");
+        relatorio.add("=== Central P2-CG ===" + System.lineSeparator());
         for (Usuario usuario : usuarios) {
             String dadosUsuario = getStringFormatadaUsuario(usuario);
+            total = 0;
             for (Jogo jogo : usuario.getJogosComprados()) {
                 dadosUsuario += getStringFormatadaJogo(jogo);
                 total += jogo.getPreco();
             }
             relatorio.add(dadosUsuario);
+            String totalStr = "Total de preço dos jogos: " + String.format("%.2f", total) + System.lineSeparator() + System.lineSeparator();
+            relatorio.add(totalStr);
         }
 
-        String totalStr = "Total de preço dos jogos: " + String.format("%.2f", total) + System.lineSeparator();
-        relatorio.add(totalStr);
         return relatorio;
     }
 

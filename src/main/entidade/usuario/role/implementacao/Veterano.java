@@ -12,6 +12,7 @@ public class Veterano implements Role {
 
     private static final double DESCONTO_VETERANO = 0.20;
     private static final int X2P_INICIAL_VETERANO = 1000;
+    public static final String REPRESENTACAO_STRING = "Veterano";
 
     /**
      * {@inheritDoc}

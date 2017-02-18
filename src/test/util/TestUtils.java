@@ -6,9 +6,17 @@ import main.entidade.jogo.exception.JogoInvalidoException;
 import main.entidade.jogo.tipo.Luta;
 import main.entidade.jogo.tipo.Plataforma;
 import main.entidade.jogo.tipo.Rpg;
+import main.entidade.usuario.Usuario;
+import main.entidade.usuario.exception.UsuarioInvalidoException;
+import main.entidade.usuario.role.implementacao.Noob;
+import main.entidade.usuario.role.implementacao.Veterano;
+import main.service.Formatadora;
+import main.service.implementacao.FormatadoraCentralP2Cg;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -57,5 +65,29 @@ public class TestUtils {
         jogos.put("Final Fantasy X", jogo5);
 
         return jogos;
+    }
+
+    public static List<Usuario> getUsuarios() throws UsuarioInvalidoException {
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("Antonio", "antonio", new HashMap<>(), new Veterano()));
+        usuarios.add(new Usuario("Joao", "joao", new HashMap<>(), new Veterano()));
+        usuarios.add(new Usuario("Pedro", "pedro", new HashMap<>(), new Veterano()));
+        usuarios.add(new Usuario("Mauro", "mauro", new HashMap<>(), new Noob()));
+        usuarios.add(new Usuario("Jose", "jose", new HashMap<>(), new Noob()));
+        return usuarios;
+    }
+
+    public static Map<String, Usuario> getMapaUsuarios() throws UsuarioInvalidoException {
+        Map<String, Usuario> usuarios = new HashMap<>();
+        usuarios.put("antonio", new Usuario("Antonio", "antonio", new HashMap<>(), new Veterano()));
+        usuarios.put("joao", new Usuario("Joao", "joao", new HashMap<>(), new Veterano()));
+        usuarios.put("pedro", new Usuario("Pedro", "pedro", new HashMap<>(), new Veterano()));
+        usuarios.put("mauro", new Usuario("Mauro", "mauro", new HashMap<>(), new Noob()));
+        usuarios.put("jose", new Usuario("Jose", "jose", new HashMap<>(), new Noob()));
+        return usuarios;
+    }
+
+    public static Formatadora getFormatadora() {
+        return new FormatadoraCentralP2Cg();
     }
 }
