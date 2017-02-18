@@ -23,12 +23,13 @@ public interface LojaControlador {
     String SALDO_DE_USUARIO_INSUFICIENTE = "Saldo do usuário insuficiente";
     String USUARIO_NAO_ENCONTRADO = "O usuário não pode ser encontrado.";
     String USUARIO_JA_E_VETERANO = "Usuário já é veterano.";
+    String QUANTIDADE_X2P_INSUFICIENTE = "Usuário não possui quantidade suficiente de x2p";
     int X2P_MINIMO_VETERANO = 1000;
 
     /**
      * Template para a mensagem de jogabilidade inexistente.
      */
-    String TEMPLATE_JOGABILIDADE_NAO_EXISTENTE = "Jogo inválido, a jogabilidade  %s não existe.";
+    String TEMPLATE_JOGABILIDADE_NAO_EXISTENTE = "Jogo inválido, a jogabilidade  \"%s\" não existe.";
 
     /**
      * Adiciona um {@link Usuario} à loja.

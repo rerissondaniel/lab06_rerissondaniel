@@ -19,6 +19,7 @@ public class Usuario {
     private static final String LOGIN_INVALIDO = "O login do usuário é inválido!";
     private static final String NOME_INVALIDO = "O nome do usuário é inválido";
     private static final String ROLE_INVALIDO = "É necessário que o usuário tenha um role inicial.";
+    private static final String JOGO_JA_VENDIDO = "Jogo já vendido a este usuário";
 
     /**
      * Nome deste usuário.
@@ -121,7 +122,11 @@ public class Usuario {
      *
      * @param jogo - {@link Jogo} a ser adicionado.
      */
-    public void adicionaJogo(final Jogo jogo) {
+    public void adicionaJogo(final Jogo jogo) throws JogoInvalidoException {
+        Jogo aux = jogosComprados.get(jogo.getNome());
+        if (aux != null) {
+            throw new JogoInvalidoException(JOGO_JA_VENDIDO);
+        }
         this.saldo -= jogo.getPreco() - (jogo.getPreco() * role.getDesconto());
         jogosComprados.put(jogo.getNome(), jogo);
         this.x2p += role.getx2pCompra(jogo.getPreco());

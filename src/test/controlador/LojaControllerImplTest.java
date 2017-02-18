@@ -4,6 +4,7 @@ import main.controlador.LojaControlador;
 import main.controlador.implementacao.LojaControladorImpl;
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
+import main.entidade.jogo.tipo.Luta;
 import main.entidade.usuario.exception.UsuarioInvalidoException;
 import main.service.exception.SaldoInsuficienteException;
 import main.service.exception.UsuarioInaptoException;
@@ -47,6 +48,15 @@ public class LojaControllerImplTest {
         controlador.vendeJogo("mauro", finalFantasy.getNome(), new HashSet<>(), finalFantasy.getPreco(), "luta");
     }
 
+    @Test(expected = JogoInvalidoException.class)
+    public void testaVendeJogorepetido() throws JogoInvalidoException, SaldoInsuficienteException, UsuarioInvalidoException {
+        controlador = new LojaControladorImpl(TestUtils.getMapaUsuarios(), TestUtils.getFormatadora());
+        Jogo mkUltimate = TestUtils.getJogos().get("MK ultimate");
+        controlador.adicionarDinheiroUsuario("jose", 100000);
+        controlador.vendeJogo("jose", mkUltimate.getNome(), new HashSet<>(), mkUltimate.getPreco(), Luta.REPRESENTACAO_STRING);
+        controlador.vendeJogo("jose", mkUltimate.getNome(), new HashSet<>(), mkUltimate.getPreco(), Luta.REPRESENTACAO_STRING);
+    }
+
     @Test
     public void testaVendeJogo() throws JogoInvalidoException, SaldoInsuficienteException, UsuarioInvalidoException {
         controlador = new LojaControladorImpl(TestUtils.getMapaUsuarios(), TestUtils.getFormatadora());
@@ -58,12 +68,26 @@ public class LojaControllerImplTest {
     }
 
     @Test
-    public void testaUpgrade() throws UsuarioInvalidoException, UsuarioInaptoException {
+    public void testaUpgradeValido() throws UsuarioInvalidoException, UsuarioInaptoException, JogoInvalidoException, SaldoInsuficienteException {
         controlador = new LojaControladorImpl(TestUtils.getMapaUsuarios(), TestUtils.getFormatadora());
+        Jogo mkUltimate = TestUtils.getJogos().get("MK ultimate");
+        controlador.adicionarDinheiroUsuario("jose", 100000);
+        controlador.vendeJogo("jose", mkUltimate.getNome(), new HashSet<>(), mkUltimate.getPreco(), Luta.REPRESENTACAO_STRING);
+
+        controlador.registraJogada("MK ultimate", "jose", 100001, false);
+        controlador.registraJogada("MK ultimate", "jose", 100002, false);
+        controlador.registraJogada("MK ultimate", "jose", 100003, false);
+        controlador.registraJogada("MK ultimate", "jose", 100004, false);
+        controlador.registraJogada("MK ultimate", "jose", 100005, false);
+        controlador.registraJogada("MK ultimate", "jose", 100006, false);
+        controlador.registraJogada("MK ultimate", "jose", 100007, false);
+
+        controlador.upgrade("jose");
     }
 
-    @Test
-    public void testaRegistraJogada() throws JogoInvalidoException, UsuarioInvalidoException {
-
+    @Test(expected = UsuarioInaptoException.class)
+    public void testaUpgradeInvalido() throws UsuarioInvalidoException, UsuarioInaptoException {
+        controlador = new LojaControladorImpl(TestUtils.getMapaUsuarios(), TestUtils.getFormatadora());
+        controlador.upgrade("mauro");
     }
 }

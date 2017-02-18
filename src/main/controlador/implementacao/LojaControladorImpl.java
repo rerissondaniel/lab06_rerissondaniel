@@ -88,12 +88,8 @@ public class LojaControladorImpl implements LojaControlador {
     public void upgrade(final String login) throws UsuarioInvalidoException, UsuarioInaptoException {
         Usuario usuario = usuarios.get(login);
         verificaValidadeUsuario(usuario);
-
-        if (verificaUsuarioAptoUpgrade(usuario)) {
-            usuario.setRole(new Veterano());
-        } else {
-            throw new UsuarioInaptoException(USUARIO_JA_E_VETERANO);
-        }
+        verificaUsuarioAptoUpgrade(usuario);
+        usuario.setRole(new Veterano());
     }
 
     /**
@@ -160,11 +156,15 @@ public class LojaControladorImpl implements LojaControlador {
      * Verifica se {@code usuario} é apto ao upgrade.
      *
      * @param usuario {@link Usuario} a ser validado.
-     * @return true, caso o usuário seja apto.
+     * @throws
      */
-    private boolean verificaUsuarioAptoUpgrade(Usuario usuario) {
+    private void verificaUsuarioAptoUpgrade(Usuario usuario) throws UsuarioInaptoException {
         Role papel = usuario.getRole();
-        return papel.getClass().equals(Noob.class) && usuario.getX2p() >= X2P_MINIMO_VETERANO;
+        if (!papel.getClass().equals(Noob.class)) {
+            throw new UsuarioInaptoException(USUARIO_JA_E_VETERANO);
+        }else if(usuario.getX2p() < X2P_MINIMO_VETERANO){
+            throw new UsuarioInaptoException(QUANTIDADE_X2P_INSUFICIENTE);
+        }
     }
 
     /**
