@@ -25,7 +25,7 @@ public class Main {
         Loja loja = new Loja(new Teclado(), new Console(),
                 new LojaControladorImpl(new HashMap<>(), new FormatadoraCentralP2Cg()));
 
-        loja.iniciarSistema();
+        loja.iniciaSistema();
     }
 
 }

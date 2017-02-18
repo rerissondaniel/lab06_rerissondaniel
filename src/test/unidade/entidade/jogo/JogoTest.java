@@ -1,16 +1,14 @@
 /**
  *
  */
-package test.entidade.jogo;
+package test.unidade.entidade.jogo;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import main.entidade.jogo.*;
 
 import main.entidade.jogo.exception.JogoInvalidoException;
 import main.entidade.jogo.tipo.Luta;
-import main.entidade.jogo.tipo.Plataforma;
 import main.entidade.jogo.tipo.Rpg;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,8 +17,8 @@ import test.util.TestUtils;
 
 /**
  * Testes para {@link Jogo}.
- *
- * @author rerissondcsm
+ * <p>
+ * Created by rerissondcsm on 18/02/2017.
  */
 public class JogoTest {
 
@@ -56,7 +54,6 @@ public class JogoTest {
         Assert.assertEquals(jogo1, aux);
         Assert.assertEquals(jogo1.hashCode(), aux.hashCode());
     }
-
 
 
     @Test

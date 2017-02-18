@@ -22,7 +22,7 @@ import java.util.Set;
 
 /**
  * Classe utilitária para geração de objetos comuns entre os testes, etc.
- * Created by rerisson on 18/02/17.
+ * Created by rerissondcsm on 18/02/17.
  */
 public class TestUtils {
     public static Set<Jogabilidade> getJogabilidades1() {

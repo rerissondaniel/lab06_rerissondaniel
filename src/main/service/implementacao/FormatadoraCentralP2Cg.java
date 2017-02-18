@@ -31,6 +31,7 @@ public class FormatadoraCentralP2Cg implements Formatadora {
             }
             relatorio.add(dadosUsuario);
             String totalStr = "Total de preço dos jogos: " + String.format("%.2f", total) + System.lineSeparator() + System.lineSeparator();
+            totalStr += "--------------------------------------------" + System.lineSeparator();
             relatorio.add(totalStr);
         }
 
@@ -59,9 +60,9 @@ public class FormatadoraCentralP2Cg implements Formatadora {
     private String getStringFormatadaJogo(final Jogo jogo) {
         String dadosUsuario = "";
         dadosUsuario += "+ " + jogo.getNome() + System.lineSeparator();
-        dadosUsuario += "==> Jogou " + jogo.getQtdeVezesJogadas() + "vez(es)" + System.lineSeparator();
-        dadosUsuario += "==> Zerou " + jogo.getQtdeVezesJogadas() + "vez(es)" + System.lineSeparator();
-        dadosUsuario += "==> Maior score: " + jogo.getQtdeVezesJogadas() + "vez(es)" + System.lineSeparator();
+        dadosUsuario += "==> Jogou " + jogo.getQtdeVezesJogadas() + " vez(es)" + System.lineSeparator();
+        dadosUsuario += "==> Zerou " + jogo.getQtdeZerado() + " vez(es)" + System.lineSeparator();
+        dadosUsuario += "==> Maior score: " + jogo.getMaiorScore() + "" + System.lineSeparator();
         return dadosUsuario;
     }
 }

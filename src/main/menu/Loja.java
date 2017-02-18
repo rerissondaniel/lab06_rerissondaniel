@@ -17,12 +17,12 @@ import java.util.Set;
 public class Loja {
     private static final String ADICIONAR_USUARIO_MSG = "Adicionar Usuário";
     private static final String ADICIONAR_DINHEIRO_USUARIO_MSG = "Adicionar dinheiro à conta de usuário";
-    private static final String VENDER_JOGOS_USUARIO_MSG = "Vender jogos usuário";
-    private static final String IMPRIMIR_RELATORIO_USUARIOS_MSG = "Imprimir relatório usuários";
-    private static final String OPCAO_INVALIDA_MSG = "Opção inválida";
+    private static final String VENDER_JOGOS_USUARIO_MSG = "Vender jogo a um usuário";
+    private static final String IMPRIMIR_RELATORIO_USUARIOS_MSG = "Imprimir relatório de usuários";
     private static final String USUARIO_NAO_ENCONTRADO_MSG = "Usuário não encontrado";
-    private static final String UPGRADE_USUARIO_MSG = "Fazer upgrade de usuário: ";
+    private static final String UPGRADE_USUARIO_MSG = "Fazer upgrade de usuário ";
     private static final String SAIR_MSG = "Sair";
+    private static final String OPCAO_INVALIDA_MSG = "Opção inválida";
 
     private static final String INSIRA_UMA_OPCAO_MSG = "Insira uma opção: ";
     private static final String INSIRA_NOME_MSG = "Insira o nome: ";
@@ -36,17 +36,18 @@ public class Loja {
     private static final String NAO_MSG = "Nao";
     private static final String SIM_MSG = "Sim";
 
-    private static final String USUARIO_ZEROU_JOGO_MSG = "O usuário zerou o jogo? (" + SIM_MSG + "/" + NAO_MSG;
+    private static final String USUARIO_ZEROU_JOGO_MSG = "O usuário zerou o jogo? (" + SIM_MSG + "/" + NAO_MSG + ")";
 
     private static final String INSIRA_TIPO_JOGO_MSG = "Insira o tipo do jogo (Rpg, Luta ou Plataforma): ";
+    private static final String REGISTRAR_JOGADA_MSG = "Registrar jogada de usuário";
     private static final String ACABOU_OP = "acabou";
+
     private static final int ADICIONAR_USUARIO_OP = 1;
     private static final int ADICIONAR_DINHEIRO_USUARIO_OP = 2;
     private static final int VENDER_JOGOS_USUARIO_OP = 3;
     private static final int IMPRIMIR_RELATORIO_USUARIOS_OP = 4;
     private static final int UPGRADE_USUARIO_OP = 5;
-
-    private static final int REGISTRA_JOGADA = 6;
+    private static final int REGISTRAR_JOGADA_OP = 6;
     private static final int SAIR_OP = 7;
 
     private static final String INSIRA_O_SCORE_MSG = "Insira o score: ";
@@ -81,7 +82,7 @@ public class Loja {
     /**
      * Inicia o sistema e exibe menus ao usuário.
      */
-    public void iniciarSistema() {
+    public void iniciaSistema() {
         int op;
         do {
             imprimeOpcoes();
@@ -121,7 +122,7 @@ public class Loja {
             case SAIR_OP:
                 break;
 
-            case REGISTRA_JOGADA:
+            case REGISTRAR_JOGADA_OP:
                 registraJogada();
                 break;
             default:
@@ -328,5 +329,7 @@ public class Loja {
                 + IMPRIMIR_RELATORIO_USUARIOS_MSG);
         saida.escreve(UPGRADE_USUARIO_OP + " - "
                 + UPGRADE_USUARIO_MSG);
+        saida.escreve(REGISTRAR_JOGADA_OP + " - "
+                + REGISTRAR_JOGADA_MSG);
     }
 }

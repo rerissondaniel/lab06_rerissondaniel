@@ -1,4 +1,4 @@
-package test.entidade.jogo.tipo;
+package test.unidade.entidade.jogo.tipo;
 
 import main.entidade.jogo.Jogabilidade;
 import main.entidade.jogo.Jogo;

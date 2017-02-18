@@ -1,8 +1,9 @@
-package test.entidade.jogo.tipo;
+package test.unidade.entidade.jogo.tipo;
 
 import main.entidade.jogo.Jogabilidade;
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
+import main.entidade.jogo.tipo.Luta;
 import main.entidade.jogo.tipo.Rpg;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,10 +13,10 @@ import test.util.TestUtils;
 import java.util.Set;
 
 /**
- * Testes para {@link Rpg}
- * Created by rerisson on 18/02/17.
+ * Testes para {@link Luta}
+ * Created by rerissondcsm on 18/02/17.
  */
-public class RpgTest {
+public class LutaTest {
 
     private Set<Jogabilidade> jogabilidades;
 
@@ -26,8 +27,8 @@ public class RpgTest {
 
     @Test
     public void testaRegistraJogada() throws JogoInvalidoException {
-        Jogo jogo1 = new Rpg("Final Fantasy XIV", 50.00, jogabilidades);
-        Assert.assertEquals(10, jogo1.registraJogada(11000, true));
+        Jogo jogo3 = new Luta("Tekken", 200.00, jogabilidades);
+        Assert.assertEquals(1, jogo3.registraJogada(1000, true));
     }
 
     @Test
@@ -38,6 +39,6 @@ public class RpgTest {
 
     @Test
     public void testaGetRepresentacaoString() throws JogoInvalidoException {
-        Assert.assertEquals("Rpg", Rpg.REPRESENTACAO_STRING);
+        Assert.assertEquals("Luta", Luta.REPRESENTACAO_STRING);
     }
 }

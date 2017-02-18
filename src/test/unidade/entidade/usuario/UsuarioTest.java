@@ -1,4 +1,4 @@
-package test.entidade.usuario;
+package test.unidade.entidade.usuario;
 
 import main.entidade.jogo.exception.JogoInvalidoException;
 import main.entidade.usuario.Usuario;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 /**
  * Testes para {@link Usuario} e suas respectivas filhas.
- * Created by rerisson on 18/02/17.
+ * Created by rerissondcsm on 18/02/17.
  */
 public class UsuarioTest {
 

@@ -1,4 +1,4 @@
-package test.controlador;
+package test.unidade.controlador;
 
 import main.controlador.LojaControlador;
 import main.controlador.implementacao.LojaControladorImpl;

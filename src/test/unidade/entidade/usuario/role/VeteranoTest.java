@@ -1,4 +1,4 @@
-package test.entidade.usuario.role;
+package test.unidade.entidade.usuario.role;
 
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
