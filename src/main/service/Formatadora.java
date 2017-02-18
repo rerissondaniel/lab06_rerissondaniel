@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * Interface de formatação de dados.
  * Created by rerissondcsm on 15/02/17.
  */
 public interface Formatadora {

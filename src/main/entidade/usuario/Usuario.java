@@ -3,8 +3,9 @@ package main.entidade.usuario;
 import java.util.*;
 
 import main.entidade.jogo.Jogo;
+import main.entidade.usuario.exception.UsuarioInvalidoException;
 import main.entidade.usuario.role.Role;
-import main.util.Util;
+import util.Util;
 
 /**
  * Classe que representa um usuário.
@@ -45,11 +46,11 @@ public class Usuario {
     /**
      * Construtor.
      *
-     * @param nome
-     * @param login
-     * @param jogosComprados
-     * @param role
-     * @throws UsuarioInvalidoException
+     * @param nome           - nome do usuário.
+     * @param login          - login do usuário.
+     * @param jogosComprados - jogos comprados pelo usuário.
+     * @param role           - role do usuário.
+     * @throws UsuarioInvalidoException Caso o usuário não seja válido
      */
     public Usuario(String nome, String login, Map<String, Jogo> jogosComprados,
                    Role role) throws UsuarioInvalidoException {
@@ -83,12 +84,23 @@ public class Usuario {
      * Assume que esta é uma venda válida, isto é, este usuário pode comprar {@code jogo}, independentemente de
      * seu saldo ficar negativo ou não.
      *
-     * @param jogo
+     * @param jogo - {@link Jogo} a ser adicionado.
      */
     public void adicionaJogo(final Jogo jogo) {
         this.dinheiro -= jogo.getPreco();
         jogosComprados.put(jogo.getNome(), jogo);
         this.x2p += role.getx2pCompra(jogo.getPreco());
+        this.x2p += role.getx2pCompra(jogo.getPreco());
+    }
+
+    /**
+     * Retorna um jogo a partir de {@code nomeJogo}.
+     *
+     * @param nomeJogo - nome do jogo a ser recuperado.
+     * @return - {@link Jogo} que tem {@code nomeJogo} como nome.
+     */
+    public Jogo getJogo(String nomeJogo) {
+        return jogosComprados.get(nomeJogo);
     }
 
     /**

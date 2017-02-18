@@ -4,39 +4,43 @@ import main.entidade.jogo.Jogo;
 
 /**
  * Classe que representa o role do usuário noob.
- * 
- * @author rerissondcsm
  *
+ * @author rerissondcsm
  */
-public class Noob extends Role {
+public class Noob implements Role {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double getDesconto() {
-		return 0.10;
-	}
+    private static final int X2P_INICIAL_NOOB = 0;
+    private static final double DESCONTO_NOOB = 0.10;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public final int getX2pInicial() {
-		return 0;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getDesconto() {
+        return DESCONTO_NOOB;
+    }
 
-	public int getX2pCompra(Jogo jogo) {
-		return (int) Math.floor(10.0 * jogo.getPreco() / 100.0);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int getX2pInicial() {
+        return X2P_INICIAL_NOOB;
+    }
 
-	@Override
-	public String toString() {
-		return "Noob";
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Noob";
+    }
 
-	@Override
-	public int getx2pCompra(double precoJogo) {
-		return (int) precoJogo * 15;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getx2pCompra(double precoJogo) {
+        return (int) precoJogo * 10;
+    }
 }

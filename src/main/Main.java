@@ -1,23 +1,31 @@
 package main;
 
-import main.controller.LojaController;
-import main.controller.implementation.LojaControllerImpl;
-import main.service.implementation.FormatadoraCentralP2Cg;
-import main.util.io.implementation.Monitor;
-import main.util.io.implementation.Teclado;
-import menu.Menu;
+import main.controlador.implementacao.LojaControladorImpl;
+import main.service.implementacao.FormatadoraCentralP2Cg;
+import util.io.implementation.Console;
+import util.io.implementation.Teclado;
+import main.menu.Loja;
 
 import java.util.HashMap;
 
 /**
- * Created by rerisson on 15/02/17.
+ * Classe que inicia o sistema.
+ * Created by rerissondcsm on 15/02/17.
  */
 public class Main {
 
     public static void main(String[] args) {
-        LojaController controller = new LojaControllerImpl(new HashMap<>(), new FormatadoraCentralP2Cg());
-        Menu menu = new Menu(new Teclado(), new Monitor(), controller);
-        menu.iniciarSistema();
+        iniciaLoja();
+    }
+
+    /**
+     * Injeta as depêndencias de {@link Loja} e inicia o sistema.
+     */
+    private static void iniciaLoja() {
+        Loja loja = new Loja(new Teclado(), new Console(),
+                new LojaControladorImpl(new HashMap<>(), new FormatadoraCentralP2Cg()));
+
+        loja.iniciarSistema();
     }
 
 }

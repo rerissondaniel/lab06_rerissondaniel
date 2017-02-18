@@ -3,10 +3,13 @@ package main.entidade.jogo.tipo;
 import main.entidade.jogo.Jogabilidade;
 import main.entidade.jogo.Jogo;
 import main.entidade.jogo.exception.JogoInvalidoException;
-import main.entidade.jogo.exception.ScoreInvalidoException;
 
 import java.util.Set;
 
+/**
+ * Classe para jogos do tipo Luta.
+ * Created by rerissondcsm on 17/02/17.
+ */
 public class Luta extends Jogo {
 
     public static final String REPRESENTACAO_STRING = "Luta";
@@ -14,6 +17,9 @@ public class Luta extends Jogo {
 
     private int maiorScoreAnterior;
 
+    /**
+     * {@inheritDoc}
+     */
     public Luta(final String nome, final double preco,
                 final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
         super(nome, preco, jogabilidade);

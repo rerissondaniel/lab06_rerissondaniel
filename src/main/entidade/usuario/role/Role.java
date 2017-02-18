@@ -6,23 +6,23 @@ package main.entidade.usuario.role;
  * @author rerissondcsm
  *
  */
-public abstract class Role {
+public interface Role {
 	/**
 	 * Método que retorna o desconto para este usuário.
 	 * 
 	 * @return O desconto para este usuário.
 	 */
-	public abstract double getDesconto();
+	double getDesconto();
 	
 	/**
 	 * Retorna o x2p para determinada compra.
 	 * @param precoJogo
 	 * @return
 	 */
-	public abstract int getx2pCompra(double precoJogo);
+	int getx2pCompra(final double precoJogo);
 	
 	/**
 	 * Altera o valor inicial do x2p do Usuário.
 	 */
-	public abstract int getX2pInicial();
+	int getX2pInicial();
 }

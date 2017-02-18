@@ -4,36 +4,43 @@ import main.entidade.jogo.Jogo;
 
 /**
  * Classe que representa o Role do usuário veterano.
- * 
- * @author rerissondcsm
  *
+ * @author rerissondcsm
  */
-public class Veterano extends Role {
+public class Veterano implements Role {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public double getDesconto() {
-		return 0.20;
-	}
+    private static final double DESCONTO_VETERANO = 0.20;
+    private static final int X2P_INICIAL_VETERANO = 1000;
 
-	@Override
-	public final int getX2pInicial() {
-		return 1000;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getDesconto() {
+        return DESCONTO_VETERANO;
+    }
 
-	public int getX2pCompra(Jogo jogo) {
-		return (int) Math.floor(10.0 * jogo.getPreco() / 100.0);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final int getX2pInicial() {
+        return X2P_INICIAL_VETERANO;
+    }
 
-	@Override
-	public String toString() {
-		return "Veterano";
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Veterano";
+    }
 
-	@Override
-	public int getx2pCompra(double precoJogo) {
-		return (int)precoJogo * 15;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getx2pCompra(double precoJogo) {
+        return (int) precoJogo * 15;
+    }
 }

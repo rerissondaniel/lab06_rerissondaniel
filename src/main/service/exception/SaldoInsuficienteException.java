@@ -1,9 +1,13 @@
 package main.service.exception;
 
 /**
- * Created by rerisson on 14/02/17.
+ * Exceção para saldo insuficiente.
+ * Created by rerissondcsm on 14/02/17.
  */
 public class SaldoInsuficienteException extends Exception {
+    /**
+     * {@inheritDoc}
+     */
     public SaldoInsuficienteException(String message) {
         super(message);
     }

@@ -6,13 +6,30 @@ import main.entidade.jogo.exception.JogoInvalidoException;
 
 import java.util.Set;
 
+/**
+ * Classe para jogos do tipo Plataforma.
+ * * Created by rerissondcsm on 17/02/17.
+ */
 public class Plataforma extends Jogo {
 
+    /**
+     * Representação desta classe de jogos como {@link String}.
+     */
     public static final String REPRESENTACAO_STRING = "Plataforma";
+
+    /**
+     * Fator de pontuação para jogos de plataforma.
+     */
     private static final int FATOR_PONTUACAO_PLATAFORMA = 20;
 
+    /**
+     * Quantidade de vezes que o jogo foi zerado anteriormente.
+     */
     private int qtdeZerouAnterior;
 
+    /**
+     * {@inheritDoc}
+     */
     public Plataforma(final String nome, final double preco,
                       final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
         super(nome, preco, jogabilidade);

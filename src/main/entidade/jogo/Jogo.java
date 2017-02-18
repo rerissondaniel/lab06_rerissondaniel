@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import main.entidade.jogo.exception.JogoInvalidoException;
-import main.util.Util;
+import util.Util;
 
 /**
  * Classe que representa um jogo.
@@ -38,9 +38,9 @@ public abstract class Jogo {
 	private int qtdeZerado;
 
 	/**
-	 * Indica o estilo de jogabilidade do jogo. Veja {@link Jogabilidade}
+	 * Indica o estilo de jogabilidades do jogo. Veja {@link Jogabilidade}
 	 */
-	private Set<Jogabilidade> jogabilidade;
+	private Set<Jogabilidade> jogabilidades;
 
 	/**
 	 * Construtor.
@@ -49,23 +49,42 @@ public abstract class Jogo {
 	 *            - O nome deste jogo.
 	 * @param preco
 	 *            - O preço deste jogo.
-	 * @param jogabilidade
+	 * @param jogabilidades
 	 *            - O conjunto de {@link Jogabilidade} deste jogo.
 	 */
 	public Jogo(final String nome, final double preco,
-			final Set<Jogabilidade> jogabilidade) throws JogoInvalidoException {
+			final Set<Jogabilidade> jogabilidades) throws JogoInvalidoException {
 		if(Util.ehNulaOuVazia(nome)){
 			throw new JogoInvalidoException("O nome do jogo não pode ser vazio.");
 		}
-		if(jogabilidade == null){
-			throw new JogoInvalidoException("A jogabilidade do jogo não pode ser nula.");
+		if(jogabilidades == null){
+			throw new JogoInvalidoException("A jogabilidades do jogo não pode ser nula.");
 		}
 		this.nome = nome;
 		this.preco = preco;
 		this.maiorScore = 0;
-		this.jogabilidade = jogabilidade;
+		this.jogabilidades = jogabilidades;
 	}
-	
+
+	/**
+	 * Registra uma jogada. Caso o {@code score} seja maior que
+	 * {@code maiorScore}, {@code maiorScore} passa a ter o valor de score. Caso
+	 * {@code zerou} seja true, {@code qtdeZerado} será incrementada em 1.
+	 *
+	 * @param score
+	 *            - Score do jogador na jogada.
+	 * @param zerou
+	 *            - Indica se o jogador zerou o jogo.
+	 */
+	public int registraJogada(final int score, final boolean zerou) {
+		this.maiorScore = Math.max(score, this.maiorScore);
+		this.qtdeVezesJogadas++;
+		if (zerou) {
+			this.qtdeZerado++;
+		}
+		return getX2pJogada();
+	}
+
 	/**
 	 * @return o x2p para determinada jogada
 	 */
@@ -81,37 +100,17 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * Altera o preço deste jogo.
-	 * 
-	 * @param preco
-	 *            - Novo preço deste jogo.
-	 */
-	public void setPreco(final double preco) {
-		this.preco = preco;
-	}
-
-	/**
 	 * Recupera o conjunto de jogabilidades deste jogo. Caso o conjunto de
 	 * jogabilidades seja null, retorna um HashSet vazio para evitar
 	 * {@link NullPointerException}.
 	 * 
 	 * @return - O conjunto de jogabilidades deste jogo.
 	 */
-	public Set<Jogabilidade> getJogabilidade() {
-		if (jogabilidade == null) {
-			jogabilidade = new HashSet<>();
+	public Set<Jogabilidade> getJogabilidades() {
+		if (jogabilidades == null) {
+			jogabilidades = new HashSet<>();
 		}
-		return jogabilidade;
-	}
-
-	/**
-	 * Altera o conjunto de jogabilidades deste jogo.
-	 * 
-	 * @param jogabilidades
-	 *            - Conjunto de jogabilidades para este jogo.
-	 */
-	public void setJogabilidade(Set<Jogabilidade> jogabilidades) {
-		this.jogabilidade = jogabilidades;
+		return jogabilidades;
 	}
 
 	/**
@@ -151,25 +150,6 @@ public abstract class Jogo {
 	}
 
 	/**
-	 * Registra uma jogada. Caso o {@code score} seja maior que
-	 * {@code maiorScore}, {@code maiorScore} passa a ter o valor de score. Caso
-	 * {@code zerou} seja true, {@code qtdeZerado} será incrementada em 1.
-	 * 
-	 * @param score
-	 *            - Score do jogador na jogada.
-	 * @param zerou
-	 *            - Indica se o jogador zerou o jogo.
-	 */
-	public int registraJogada(final int score, final boolean zerou) {
-		this.maiorScore = Math.max(score, this.maiorScore);
-		this.qtdeVezesJogadas++;
-		if (zerou) {
-			this.qtdeZerado++;
-		}
-		return getX2pJogada();
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -177,7 +157,7 @@ public abstract class Jogo {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((jogabilidade == null) ? 0 : jogabilidade.hashCode());
+				+ ((jogabilidades == null) ? 0 : jogabilidades.hashCode());
 		result = prime * result + maiorScore;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		long temp;
@@ -200,10 +180,10 @@ public abstract class Jogo {
 		if (getClass() != obj.getClass())
 			return false;
 		Jogo other = (Jogo) obj;
-		if (jogabilidade == null) {
-			if (other.jogabilidade != null)
+		if (jogabilidades == null) {
+			if (other.jogabilidades != null)
 				return false;
-		} else if (!jogabilidade.equals(other.jogabilidade))
+		} else if (!jogabilidades.equals(other.jogabilidades))
 			return false;
 		if (maiorScore != other.maiorScore)
 			return false;
@@ -229,7 +209,7 @@ public abstract class Jogo {
 	public String toString() {
 		return "Jogo [nome=" + nome + ", preco=" + preco + ", maiorScore="
 				+ maiorScore + ", qtdeVezesJogadas=" + qtdeVezesJogadas
-				+ ", qtdeZerado=" + qtdeZerado + ", jogabilidade="
-				+ jogabilidade + "]";
+				+ ", qtdeZerado=" + qtdeZerado + ", jogabilidades="
+				+ jogabilidades + "]";
 	}
 }
