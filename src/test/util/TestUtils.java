@@ -27,7 +27,7 @@ import java.util.Set;
 public class TestUtils {
     private TestUtils() {
 
-	}
+    }
     
     public static Set<Jogabilidade> getJogabilidades1() {
         Set<Jogabilidade> jogabilidades = new HashSet();
