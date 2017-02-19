@@ -25,6 +25,10 @@ import java.util.Set;
  * Created by rerissondcsm on 18/02/17.
  */
 public class TestUtils {
+    private TestUtils() {
+
+	}
+    
     public static Set<Jogabilidade> getJogabilidades1() {
         Set<Jogabilidade> jogabilidades = new HashSet();
         jogabilidades.add(Jogabilidade.COMPETITIVO);
