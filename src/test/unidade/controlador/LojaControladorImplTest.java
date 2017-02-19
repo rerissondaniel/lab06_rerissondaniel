@@ -18,7 +18,7 @@ import java.util.HashSet;
  * Testes para {@link LojaControladorImpl}
  * Created by rerissondcsm on 17/02/17.
  */
-public class LojaControllerImplTest {
+public class LojaControladorImplTest {
 
     private LojaControlador controlador;
 
